@@ -8,7 +8,7 @@
 :root{
     --border-radius: 20px;
     --text-color: #eee;
-    --calculator-background: #ddd 
+    --calculator-background: #a37
 }
 
 body{
@@ -55,6 +55,10 @@ body{
     height: 100%;
     background: rgb(216, 217, 218);
     transition: 0.4s;
+}
+
+.fraction{
+    display: none;
 }
 
 .calc-btns{
