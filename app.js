@@ -1,4 +1,3 @@
-const calculator = document.querySelector('.calculator');
 const calcScreen = document.querySelector('.screen');
 const calcBtns = document.querySelectorAll('.calc-btn');
 const numberSet = document.querySelectorAll('.number');
@@ -39,8 +38,18 @@ const mathematics = {
 const fractions = {
   sixteenthDecimal: 0.0625,
   eigthDecimal: 0.125,
+  threeSixteenthDecimal: 0.1875,
   quarterDecimal: 0.25,
+  fiveSixteenthDecimal: 0.3125,
+  threeEighthDecimal: 0.375,
   halfDecimal: 0.5,
+  nineSixteenthDecimal: 0.5625,
+  fiveEighthDecimal: 0.625,
+  elevenSixteenthDecimal: 0.6875,
+  threeQuarterDecimal: 0.75,
+  thirteenSixteenthDecimal: 0.8125,
+  sevenEighthDecimal: 0.875,
+  fifteenSixteenthFraction: 0.9375,
   sixteenthFraction: '1/16',
   eigthFraction: '1/8',
   quarterFraction: '1/4',
@@ -113,33 +122,6 @@ const interactions = {
       interactions.displayActiveVariableOnScreen();
     }
   },
-  specialButtonControls: item => {
-    if (item.classList.contains('special')) {
-      if (item.innerText === 'fr') {
-        if (item.classList.contains('active')) {
-          item.classList.remove('active');
-          interactions.displayStandardKeyboard();
-        } else {
-          item.classList.add('active');
-          interactions.displayFractionKeyboard();
-          console.log(item.innerText);
-        }
-      }
-      if (item.innerText === '=') {
-        mathematics.operationalLogic();
-        interactions.clearActiveToggle();
-        calcScreen.innerHTML = result;
-      }
-      if (item.innerText === 'AC') {
-        interactions.allClear();
-        calcScreen.innerHTML = ``;
-      }
-      if (item.innerText === 'C') {
-        interactions.clear();
-        calcScreen.innerHTML = ``;
-      }
-    }
-  },
   operationButtonControls: item => {
     if (item.classList.contains('operation')) {
       activeVariable = undefined;
@@ -153,6 +135,36 @@ const interactions = {
       interactions.clear();
     }
   },
+  specialButtonControls: item => {
+    if (item.classList.contains('special')) {
+      if (item.innerText === 'fr') {
+        if (item.classList.contains('active')) {
+          item.classList.remove('active');
+          interactions.displayStandardKeyboard();
+        } else {
+          item.classList.add('active');
+          interactions.displayFractionKeyboard();
+          console.log(item.innerText);
+        }
+      }
+      if (item.innerText === '=') {
+        interactions.clearActiveToggle();
+        if (!variableTwo) {
+          return (calcScreen.innerHTML = variableOne);
+        }
+        mathematics.operationalLogic();
+        calcScreen.innerHTML = result;
+      }
+      if (item.innerText === 'AC') {
+        interactions.allClear();
+        calcScreen.innerHTML = ``;
+      }
+      if (item.innerText === 'C') {
+        interactions.clear();
+        calcScreen.innerHTML = ``;
+      }
+    }
+  },
 };
 
 // Button Controls
@@ -160,8 +172,11 @@ calcBtns.forEach(item => {
   item.addEventListener('click', e => {
     interactions.createNumericVariable(e.target.innerText);
     interactions.numericButtonControls(e.target);
-    interactions.operationButtonControls(e.target);
     interactions.specialButtonControls(e.target);
+    interactions.operationButtonControls(e.target);
+    console.log(variableOne);
+    console.log(variableTwo);
+    console.log(activeOperation);
   });
 });
 

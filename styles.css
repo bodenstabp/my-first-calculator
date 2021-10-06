@@ -8,11 +8,13 @@
 :root{
     --border-radius: 20px;
     --text-color: #eee;
-    --calculator-background: #a37
+    --background: #a37;
+    --button-color: rgb(106, 85, 128);
+    --active-button-color:  rgb(56, 8, 8);
 }
 
 body{
-    background: var(--calculator-background);
+    background: var(--background);
     font-family: Arial, Helvetica, sans-serif;
     color: var(--text-color);
 }
@@ -74,19 +76,23 @@ body{
     display: grid;
     width: 60px;
     height: 60px;
-    font-size: 35px;
+    font-size: 25px;
     align-items: center;
     justify-items: center;
     border-radius: 10px;
     margin: 15px 10px;
-    background: rgb(106, 85, 128);
+    background: var(--button-color);
     color: var(--text-color);
     cursor: pointer;
     border: var(--text-color) groove 3px
 } 
 
+.calc-btn:hover {
+ filter: brightness(90%);
+}
+
 .active {
-    background: rgb(56, 8, 8);
+    background: var(--active-button-color);
 }
 
 .numbers{
